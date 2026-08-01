@@ -1,0 +1,48 @@
+[
+  {
+    "id": "sample_icap_1",
+    "task_type": "icap",
+    "username": "Prerana",
+    "phase": "follow_up",
+    "asked_at": "2026-07-01T18:02:00Z",
+    "problem_context": "Simplify the nested fraction expression.",
+    "prompt_context": "What is your plan for turning this into something easier to evaluate?",
+    "student_message": "I'll start from the smallest fractions hidden inside the brackets and work my way outward. First, I'll solve the tiny fractions inside the denominators, then use those results to simplify the bigger fractions.",
+    "assistant_response": "Yes — that is a sensible plan, and your reason for working from the inside outward makes good mathematical sense."
+  },
+  {
+    "id": "sample_init_0",
+    "task_type": "both",
+    "username": "Rajshree",
+    "phase": "follow_up",
+    "asked_at": "2026-07-01T19:20:00Z",
+    "problem_context": "Solve the equation from the previous turn.",
+    "prompt_context": "Give it a real try first.",
+    "student_message": "Can u tell the ans because I tried multiple times",
+    "assistant_response": "Keep trying for now — you have already done the important part by persisting.",
+    "auto_initiation_score": "0",
+    "auto_reason": "Direct answer request before an independent next step."
+  },
+  {
+    "id": "sample_both_1",
+    "task_type": "both",
+    "username": "QwErTyKeYbOaRd",
+    "phase": "follow_up",
+    "asked_at": "2026-07-01T20:10:00Z",
+    "problem_context": "What is 25% of 80?",
+    "prompt_context": "Since you have the answer, how did you arrive at it?",
+    "student_message": "I arrived at the answer using logical reasoning: 25% is 1/4 of something and 1/4 of 80 is 20",
+    "assistant_response": "Yes — that is exactly right, and you explained it clearly."
+  },
+  {
+    "id": "sample_icap_2",
+    "task_type": "icap",
+    "username": "applepotato",
+    "phase": "general_inquiry",
+    "asked_at": "2026-07-01T21:30:00Z",
+    "problem_context": "",
+    "prompt_context": "",
+    "student_message": "What is the measure of each angle of an equilateral triangle?",
+    "assistant_response": "I can work through it with you step by step."
+  }
+]

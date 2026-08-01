@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Message Labeler</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Message Labeler</h1>
+        <p id="datasetSummary">No dataset loaded</p>
+      </div>
+      <div class="topActions">
+        <label class="fileButton">
+          Import
+          <input id="fileInput" type="file" accept=".json,.csv,text/csv,application/json">
+        </label>
+        <button id="loadSampleButton" type="button">Reload</button>
+        <button id="exportCsvButton" type="button">Export CSV</button>
+        <button id="exportJsonButton" type="button">Export JSON</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <section class="panel">
+          <h2>Queue</h2>
+          <div class="statGrid">
+            <div><span id="totalCount">0</span><small>Total</small></div>
+            <div><span id="doneCount">0</span><small>Done</small></div>
+            <div><span id="leftCount">0</span><small>Left</small></div>
+          </div>
+          <progress id="progressBar" value="0" max="1"></progress>
+        </section>
+
+        <section class="panel controls">
+          <h2>Filters</h2>
+          <label>
+            Task
+            <select id="taskFilter">
+              <option value="all">All</option>
+              <option value="icap">ICAP</option>
+              <option value="initiation">Initiation</option>
+            </select>
+          </label>
+          <label>
+            Status
+            <select id="statusFilter">
+              <option value="needs_review">Needs review</option>
+              <option value="all">All</option>
+              <option value="done">Done</option>
+              <option value="auto_zero">Auto initiation 0</option>
+            </select>
+          </label>
+          <label>
+            Person
+            <select id="userFilter">
+              <option value="all">All</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="panel queueList" aria-label="Messages">
+          <div id="queueList"></div>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <div class="messageHeader">
+          <div>
+            <p id="recordMeta" class="meta">No record selected</p>
+            <h2 id="recordTitle">Load a queue to begin</h2>
+          </div>
+          <div class="navButtons">
+            <button id="prevButton" type="button">Previous</button>
+            <button id="nextButton" type="button">Next</button>
+          </div>
+        </div>
+
+        <section class="contextGrid">
+          <article class="contextBlock">
+            <h3>Problem</h3>
+            <p id="problemText" class="contextText emptyText">No problem context</p>
+          </article>
+          <article class="contextBlock">
+            <h3>Prompt / Prior Context</h3>
+            <p id="promptText" class="contextText emptyText">No prompt context</p>
+          </article>
+          <article class="contextBlock responseBlock">
+            <h3>Assistant Response</h3>
+            <p id="responseText" class="contextText emptyText">No assistant response</p>
+          </article>
+        </section>
+
+        <section class="studentMessage">
+          <h3>Student Message</h3>
+          <p id="studentMessageText">No message selected</p>
+        </section>
+
+        <section id="autoBanner" class="autoBanner hidden">
+          <span>Auto initiation 0</span>
+          <p id="autoReason"></p>
+          <button id="unlockAutoButton" type="button">Override</button>
+        </section>
+
+        <section class="labelGrid">
+          <article class="labelPanel" id="icapPanel">
+            <h3>ICAP / Engagement</h3>
+            <div class="rubric">
+              <p><strong>Passive</strong> Receives or gives a minimal answer; little/no visible processing.</p>
+              <p><strong>Active</strong> Gives an answer, repeats, calculates, or applies a step with little explanation.</p>
+              <p><strong>Constructive</strong> Adds reasoning, explains a method, makes an inference, or generates a strategy.</p>
+              <p><strong>Interactive</strong> Meaningfully builds on the tutor/context through back-and-forth sensemaking.</p>
+            </div>
+            <div class="buttonGroup" id="icapButtons">
+              <button type="button" data-label="passive" data-score="0">Passive · 0</button>
+              <button type="button" data-label="active" data-score="0.5">Active · 0.5</button>
+              <button type="button" data-label="constructive" data-score="0.75">Constructive · 0.75</button>
+              <button type="button" data-label="interactive" data-score="1">Interactive · 1</button>
+              <button type="button" data-label="not_applicable" data-score="">N/A</button>
+            </div>
+          </article>
+
+          <article class="labelPanel" id="initiationPanel">
+            <h3>Initiation</h3>
+            <div class="rubric initiationRubric">
+              <p><strong>1</strong> Thorough reasoning/work.</p>
+              <p><strong>0.75</strong> Some reasoning/work shown.</p>
+              <p><strong>0.7</strong> Asked about a specific step.</p>
+              <p><strong>0.8</strong> Incorrect answer with visible work/reasoning.</p>
+              <p><strong>0.3</strong> Incorrect answer only, or generic hint request.</p>
+              <p><strong>0</strong> Asked for answer/cheating, gave up, or no real attempt.</p>
+            </div>
+            <div class="buttonGroup" id="initiationButtons">
+              <button type="button" data-label="answer_or_gave_up" data-score="0">0 Answer/gave up</button>
+              <button type="button" data-label="generic_hint" data-score="0.3">0.3 Generic hint</button>
+              <button type="button" data-label="incorrect_answer_only" data-score="0.3">0.3 Incorrect only</button>
+              <button type="button" data-label="specific_step" data-score="0.7">0.7 Specific step</button>
+              <button type="button" data-label="some_work" data-score="0.75">0.75 Some work</button>
+              <button type="button" data-label="incorrect_with_work" data-score="0.8">0.8 Incorrect + work</button>
+              <button type="button" data-label="thorough_work" data-score="1">1 Thorough work</button>
+              <button type="button" data-label="not_applicable" data-score="">N/A</button>
+            </div>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

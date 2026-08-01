@@ -1,0 +1,395 @@
+:root {
+  --ink: #17202a;
+  --muted: #5b6777;
+  --line: #d8e0ea;
+  --soft: #f5f7fa;
+  --blue: #276b9f;
+  --blue-soft: #e8f2fb;
+  --orange: #d86f1d;
+  --orange-soft: #fff0e4;
+  --green: #247a54;
+  --green-soft: #e8f6ef;
+  --danger: #a43b3b;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #eef2f6;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+select,
+textarea,
+input {
+  font: inherit;
+}
+
+button,
+.fileButton {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--ink);
+  padding: 9px 12px;
+  cursor: pointer;
+}
+
+button:hover,
+.fileButton:hover {
+  border-color: #9cb2c7;
+  background: #f8fafc;
+}
+
+button.active {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: var(--white);
+}
+
+button.locked {
+  border-color: #7cb699;
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.topbar {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  background: #102940;
+  color: var(--white);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.topbar p {
+  margin: 4px 0 0;
+  color: #cbd8e6;
+  font-size: 13px;
+}
+
+.topActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.topActions button,
+.fileButton {
+  background: #ffffff;
+  color: #102940;
+}
+
+.fileButton input {
+  display: none;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 16px;
+  height: calc(100vh - 76px);
+  padding: 16px;
+}
+
+.sidebar,
+.workspace {
+  min-height: 0;
+}
+
+.sidebar {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 12px;
+}
+
+.panel,
+.workspace,
+.contextBlock,
+.studentMessage,
+.labelPanel,
+.notesPanel,
+.autoBanner {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.panel {
+  padding: 14px;
+}
+
+.panel h2,
+.labelPanel h3,
+.contextBlock h3,
+.studentMessage h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: #2c3b4d;
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.statGrid div {
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--soft);
+}
+
+.statGrid span {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.statGrid small {
+  color: var(--muted);
+}
+
+progress {
+  width: 100%;
+  height: 10px;
+  margin-top: 12px;
+}
+
+.controls {
+  display: grid;
+  gap: 12px;
+}
+
+.controls label,
+.notesPanel label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  padding: 9px 10px;
+  color: var(--ink);
+}
+
+.queueList {
+  overflow: hidden;
+  padding: 0;
+}
+
+#queueList {
+  height: 100%;
+  overflow: auto;
+}
+
+.queueItem {
+  width: 100%;
+  display: grid;
+  gap: 5px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 12px 14px;
+  text-align: left;
+  background: var(--white);
+}
+
+.queueItem.selected {
+  background: var(--blue-soft);
+}
+
+.queueItem.done {
+  border-left: 5px solid var(--green);
+}
+
+.queueItem.auto {
+  border-left: 5px solid var(--orange);
+}
+
+.queueItem strong {
+  font-size: 14px;
+}
+
+.queueItem span {
+  color: var(--muted);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace {
+  overflow: auto;
+  padding: 18px;
+}
+
+.messageHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.messageHeader h2 {
+  margin: 2px 0 0;
+  font-size: 22px;
+}
+
+.meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.navButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.contextGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.contextBlock {
+  min-height: 142px;
+  padding: 14px;
+}
+
+.contextText {
+  max-height: 185px;
+  margin: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  line-height: 1.45;
+  color: #263241;
+}
+
+.emptyText {
+  color: #8a96a5;
+}
+
+.studentMessage {
+  margin-top: 12px;
+  padding: 18px;
+  background: #fcfdff;
+}
+
+.studentMessage p {
+  margin: 0;
+  white-space: pre-wrap;
+  font-size: 22px;
+  line-height: 1.45;
+}
+
+.autoBanner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: var(--orange-soft);
+  border-color: #efb375;
+}
+
+.autoBanner span {
+  color: #8f3c06;
+  font-weight: 700;
+}
+
+.autoBanner p {
+  margin: 0;
+  color: #7a4c25;
+}
+
+.hidden {
+  display: none;
+}
+
+.labelGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.labelPanel {
+  padding: 14px;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rubric {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--soft);
+  color: #3b4655;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.rubric p {
+  margin: 0;
+}
+
+.initiationRubric {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.buttonGroup button {
+  font-weight: 650;
+}
+
+@media (max-width: 980px) {
+  .topbar {
+    height: auto;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .sidebar {
+    grid-template-rows: auto auto 280px;
+  }
+
+  .contextGrid,
+  .labelGrid,
+  .initiationRubric {
+    grid-template-columns: 1fr;
+  }
+}
